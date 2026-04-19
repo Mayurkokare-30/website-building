@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mayur Portfolio</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+:root{
+  --c1:#00f7ff;
+  --c2:#a855f7;
+  --c3:#22c55e;
+  --c4:#f59e0b;
+}
+
+/* BACKGROUND */
+body{
+  color:#fff;
+  background: linear-gradient(120deg,#020617,#0f172a,#020617);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background: linear-gradient(120deg,var(--c1),var(--c2),var(--c3),var(--c4));
+  opacity:0.15;
+  filter: blur(120px);
+  animation: move 12s infinite alternate linear;
+  z-index:-2;
+}
+
+@keyframes move{
+  from{transform:translate(-10%,-10%)}
+  to{transform:translate(10%,10%)}
+}
+
+/* NAV */
+nav{
+  position:fixed; top:0; width:100%;
+  text-align:center; padding:15px;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+}
+
+nav a{
+  color:white; margin:0 15px;
+  text-decoration:none;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:3rem;
+  background: linear-gradient(90deg,var(--c1),var(--c2),var(--c3));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.btn{
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 15px var(--c1),0 0 25px var(--c2);
+}
+
+/* SECTION */
+section{
+  padding:80px 20px;
+  text-align:center;
+}
+
+.card{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(12px);
+  border-radius:15px;
+  padding:25px;
+  margin:20px auto;
+  width:85%;
+}
+
+/* SKILLS */
+.skills span{
+  display:inline-block;
+  margin:5px;
+  padding:8px 15px;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--c2),var(--c3));
+  color:black;
+}
+
+/* CALCULATOR */
+#display{
+  width:90%;
+  padding:15px;
+  font-size:1.5rem;
+  margin:10px;
+  border:none;
+  border-radius:10px;
+  text-align:right;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  padding:10px;
+}
+
+.buttons button{
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,var(--c1),var(--c4));
+  cursor:pointer;
+}
+
+.buttons button:hover{
+  box-shadow:0 0 10px var(--c1),0 0 20px var(--c4);
+}
+
+footer{
+  padding:20px;
+  background:rgba(0,0,0,0.6);
+}
+</style></head><body><nav>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+</nav><div class="hero">
+  <h1>Mayur</h1>
+  <p>Web Developer</p>
+  <button class="btn" onclick="showMessage()">Contact</button>
+</div><section id="about">
+  <h2>About Me</h2>
+  <div class="card">
+    <p>I am learning HTML, CSS and JavaScript.</p>
+  </div>
+</section><section id="skills">
+  <h2>Skills</h2>
+  <div class="card skills">
+    <span>HTML</span>
+    <span>CSS</span>
+    <span>JavaScript</span>
+  </div>
+</section><section id="projects">
+  <h2>Projects</h2>
+  <div class="card">
+    <h3>🧮 Calculator</h3><input type="text" id="display" disabled>
+
+<div class="buttons">
+  <button onclick="clearDisplay()">C</button>
+  <button onclick="deleteLast()">⌫</button>
+  <button onclick="append('/')">/</button>
+  <button onclick="append('*')">*</button>
+
+  <button onclick="append('7')">7</button>
+  <button onclick="append('8')">8</button>
+  <button onclick="append('9')">9</button>
+  <button onclick="append('-')">-</button>
+
+  <button onclick="append('4')">4</button>
+  <button onclick="append('5')">5</button>
+  <button onclick="append('6')">6</button>
+  <button onclick="append('+')">+</button>
+
+  <button onclick="append('1')">1</button>
+  <button onclick="append('2')">2</button>
+  <button onclick="append('3')">3</button>
+  <button onclick="calculate()">=</button>
+
+  <button onclick="append('0')" style="grid-column: span 2;">0</button>
+  <button onclick="append('.')">.</button>
+</div>
+
+  </div>
+</section><footer>
+  <p>© 2026 Mayur</p>
+</footer><script>
+function showMessage(){
+  alert("Contact feature coming soon 🚀");
+}
+
+let display=document.getElementById("display");
+
+function append(v){display.value+=v}
+function clearDisplay(){display.value=""}
+function deleteLast(){display.value=display.value.slice(0,-1)}
+function calculate(){
+  try{display.value=eval(display.value)}
+  catch{display.value="Error"}
+}
+</script></body>
+  </html>
